@@ -27,7 +27,7 @@ class Robot {
     }
   }
 
-  rotatteLeft() {
+  rotateLeft() {
     switch (this.facing) {
       case "NORTH":
         this.facing = "WEST";
