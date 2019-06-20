@@ -73,18 +73,34 @@ class Table {
   //Is the bot on the table?
   checkPosition(robot) {
     if (robot.xCoord < 0) {
+      console.log("I can't go that way!");
       robot.xCoord = 0;
     }
     if (robot.yCoord < 0) {
+      console.log("I can't go that way!");
       robot.yCoord = 0;
     }
     if (robot.xCoord > this.xMax) {
+      console.log("I can't go that way!");
       robot.xCoord = this.xMax;
     }
     if (robot.yCoord > this.yMax) {
+      console.log("I can't go that way!");
       robot.yCoord = this.yMax;
     }
   }
+}
+
+function handleInput(input) {
+  let placed = false;
+  if (input.startsWith("PLACE")) {
+    placed = true;
+
+    bot = new Robot(input.charAt(6), input.charAt(8), input.substring(10));
+  }
+  if (placed === true) {
+  }
+  return bot;
 }
 
 //const testBot = new Robot(0, 0, "NORTH");
@@ -93,23 +109,6 @@ const testTable = new Table(5, 5);
 // ### Example c
 
 //     PLACE 1,2,EAST
-const cBot = new Robot(1, 2, "EAST");
-console.log(cBot.reportPosition());
-//     MOVE
-cBot.moveForward();
-console.log(cBot.reportPosition());
-//     MOVE
-cBot.moveForward();
-console.log(cBot.reportPosition());
-//     LEFT
-cBot.rotateLeft();
-console.log(cBot.reportPosition());
-//     MOVE
-cBot.moveForward();
-
-//     REPORT
-console.log(cBot.reportPosition());
-
-// Expected output
-
-//     3,3,NORTH
+//const cBot = new Robot(1, 2, "EAST");
+const testbot = handleInput("PLACE 1,2,EAST");
+console.log(testbot.reportPosition());
