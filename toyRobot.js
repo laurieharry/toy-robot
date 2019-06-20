@@ -9,16 +9,16 @@ class Robot {
   moveForward() {
     switch (this.facing) {
       case "NORTH":
-        this.xCoord++;
-        break;
-      case "EAST":
         this.yCoord++;
         break;
+      case "EAST":
+        this.xCoord++;
+        break;
       case "SOUTH":
-        this.xCoord--;
+        this.yCoord--;
         break;
       case "WEST":
-        this.yCoord--;
+        this.xCoord--;
         break;
     }
   }
@@ -60,7 +60,7 @@ class Robot {
 
   //REPORT
   reportPosition() {
-    return this.yCoord + "," + this.xCoord + "," + this.facing;
+    return this.xCoord + "," + this.yCoord + "," + this.facing;
   }
 }
 
@@ -87,13 +87,29 @@ class Table {
   }
 }
 
-const testBot = new Robot(0, 0, "NORTH");
+//const testBot = new Robot(0, 0, "NORTH");
 const testTable = new Table(5, 5);
 
-console.log(testBot.reportPosition());
-testBot.rotateRight();
-testBot.rotateRight();
-testBot.rotateRight();
-testBot.moveForward();
-testTable.checkPosition(testBot);
-console.log(testBot.reportPosition());
+// ### Example c
+
+//     PLACE 1,2,EAST
+const cBot = new Robot(1, 2, "EAST");
+console.log(cBot.reportPosition());
+//     MOVE
+cBot.moveForward();
+console.log(cBot.reportPosition());
+//     MOVE
+cBot.moveForward();
+console.log(cBot.reportPosition());
+//     LEFT
+cBot.rotateLeft();
+console.log(cBot.reportPosition());
+//     MOVE
+cBot.moveForward();
+
+//     REPORT
+console.log(cBot.reportPosition());
+
+// Expected output
+
+//     3,3,NORTH
