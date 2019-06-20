@@ -69,11 +69,31 @@ class Table {
     this.xMax = xMax;
     this.yMax = yMax;
   }
+
+  //Is the bot on the table?
+  checkPosition(robot) {
+    if (robot.xCoord < 0) {
+      robot.xCoord = 0;
+    }
+    if (robot.yCoord < 0) {
+      robot.yCoord = 0;
+    }
+    if (robot.xCoord > this.xMax) {
+      robot.xCoord = this.xMax;
+    }
+    if (robot.yCoord > this.yMax) {
+      robot.yCoord = this.yMax;
+    }
+  }
 }
 
 const testBot = new Robot(0, 0, "NORTH");
 const testTable = new Table(5, 5);
 
 console.log(testBot.reportPosition());
-console.log(testBot.moveForward());
+testBot.rotateRight();
+testBot.rotateRight();
+testBot.rotateRight();
+testBot.moveForward();
+testTable.checkPosition(testBot);
 console.log(testBot.reportPosition());
