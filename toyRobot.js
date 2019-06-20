@@ -5,9 +5,23 @@ class Robot {
     this.yCoord = yCoord;
   }
 
-  //PLACE X,Y,F
-
   //MOVE
+  moveForward() {
+    switch (this.facing) {
+      case "NORTH":
+        this.xCoord++;
+        break;
+      case "EAST":
+        this.yCoord++;
+        break;
+      case "SOUTH":
+        this.xCoord--;
+        break;
+      case "WEST":
+        this.yCoord--;
+        break;
+    }
+  }
 
   //TURN
   rotateRight() {
