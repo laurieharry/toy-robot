@@ -1,5 +1,5 @@
 class Robot {
-  constructor(facing, xCoord, yCoord) {
+  constructor(xCoord, yCoord, facing) {
     this.facing = facing;
     this.xCoord = xCoord;
     this.yCoord = yCoord;
@@ -60,7 +60,7 @@ class Robot {
 
   //REPORT
   reportPosition() {
-    return this.xCoord + "," + this.yCoord + "," + this.facing;
+    return this.yCoord + "," + this.xCoord + "," + this.facing;
   }
 }
 
@@ -70,3 +70,10 @@ class Table {
     this.yMax = yMax;
   }
 }
+
+const testBot = new Robot(0, 0, "NORTH");
+const testTable = new Table(5, 5);
+
+console.log(testBot.reportPosition());
+console.log(testBot.moveForward());
+console.log(testBot.reportPosition());
