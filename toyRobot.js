@@ -9,11 +9,45 @@ class Robot {
 
   //MOVE
 
-  //LEFT
+  //TURN
+  rotateRight() {
+    switch (this.facing) {
+      case "NORTH":
+        this.facing = "EAST";
+        break;
+      case "EAST":
+        this.facing = "SOUTH";
+        break;
+      case "SOUTH":
+        this.facing = "WEST";
+        break;
+      case "WEST":
+        this.facing = "NORTH";
+        break;
+    }
+  }
 
-  //RIGHT
+  rotatteLeft() {
+    switch (this.facing) {
+      case "NORTH":
+        this.facing = "WEST";
+        break;
+      case "EAST":
+        this.facing = "NORTH";
+        break;
+      case "SOUTH":
+        this.facing = "EAST";
+        break;
+      case "WEST":
+        this.facing = "SOUTH";
+        break;
+    }
+  }
 
   //REPORT
+  reportPosition() {
+    return this.xCoord + "," + this.yCoord + "," + this.facing;
+  }
 }
 
 class Table {
