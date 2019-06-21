@@ -1,0 +1,136 @@
+<html>
+  <script>
+    class Robot {
+      constructor(xCoord, yCoord, facing) {
+        this.facing = facing;
+        this.xCoord = xCoord;
+        this.yCoord = yCoord;
+      }
+
+      //MOVE
+      moveForward() {
+        switch (this.facing) {
+          case "NORTH":
+            this.yCoord++;
+            break;
+          case "EAST":
+            this.xCoord++;
+            break;
+          case "SOUTH":
+            this.yCoord--;
+            break;
+          case "WEST":
+            this.xCoord--;
+            break;
+        }
+      }
+
+      //TURN
+      rotateRight() {
+        switch (this.facing) {
+          case "NORTH":
+            this.facing = "EAST";
+            break;
+          case "EAST":
+            this.facing = "SOUTH";
+            break;
+          case "SOUTH":
+            this.facing = "WEST";
+            break;
+          case "WEST":
+            this.facing = "NORTH";
+            break;
+        }
+      }
+
+      rotateLeft() {
+        switch (this.facing) {
+          case "NORTH":
+            this.facing = "WEST";
+            break;
+          case "EAST":
+            this.facing = "NORTH";
+            break;
+          case "SOUTH":
+            this.facing = "EAST";
+            break;
+          case "WEST":
+            this.facing = "SOUTH";
+            break;
+        }
+      }
+
+      //REPORT
+      reportPosition() {
+        return this.xCoord + "," + this.yCoord + "," + this.facing;
+      }
+    }
+
+    class Table {
+      constructor(xMax, yMax) {
+        this.xMax = xMax;
+        this.yMax = yMax;
+      }
+    }
+
+    //Is the bot on the table?
+    function checkPosition(robot, table) {
+      if (
+        robot.xCoord < 0 ||
+        robot.xCoord > table.xMax ||
+        robot.yCoord < 0 ||
+        robot.yCoord > table.yMax
+      ) {
+        alert("I can't go that way!");
+        return false;
+      } else {
+        return true;
+      }
+    }
+
+    function handleInput(bot, table) {
+      let placed = false;
+      let input = "";
+      while (input != "QUIT") {
+        input = prompt("I'm a bot what should I do?");
+
+        if (input.startsWith("PLACE")) {
+          //Create a test bot to see if position valid
+          let str = input.substring(6);
+          let splitInput = str.split(",");
+
+          let safeBot = new Robot(splitInput[0], splitInput[1], splitInput[2]);
+          if (checkPosition(safeBot, table)) {
+            placed = true;
+            //safebot passed the test so the new bot can safely be placed
+            bot = safeBot;
+            alert("Created bot at " + bot.reportPosition());
+          }
+        }
+        if (input === "LEFT" && placed === true) {
+          bot.rotateLeft();
+        }
+        if (input === "RIGHT" && placed === true) {
+          bot.rotateRight();
+        }
+        if (input === "MOVE" && placed === true) {
+          let safeBot = new Robot(bot.xCoord, bot.yCoord, bot.facing);
+          safeBot.moveForward();
+          if (checkPosition(safeBot, table)) {
+            bot.moveForward();
+          }
+        }
+        if (input === "REPORT" && placed === true) {
+          alert(bot.reportPosition());
+        } else if (!placed) {
+          alert("You need to put me on the table first!");
+        }
+      }
+    }
+
+    const testTable = new Table(5, 5);
+    let myBot = new Robot();
+
+    handleInput(myBot, testTable);
+  </script>
+</html>
