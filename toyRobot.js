@@ -95,20 +95,16 @@ function handleInput(input) {
   let placed = false;
   if (input.startsWith("PLACE")) {
     placed = true;
-
-    bot = new Robot(input.charAt(6), input.charAt(8), input.substring(10));
+    return new Robot(input.charAt(6), input.charAt(8), input.substring(10));
+  } else if (placed === true) {
+    if (input === "MOVE") {
+    }
   }
-  if (placed === true) {
-  }
-  return bot;
 }
 
-//const testBot = new Robot(0, 0, "NORTH");
 const testTable = new Table(5, 5);
 
-// ### Example c
+var testBot = new Robot(0, 0, "NORTH");
 
-//     PLACE 1,2,EAST
-//const cBot = new Robot(1, 2, "EAST");
-const testbot = handleInput("PLACE 1,2,EAST");
-console.log(testbot.reportPosition());
+bot1 = handleInput("PLACE 1,2, EAST");
+console.log(bot1.reportPosition());
