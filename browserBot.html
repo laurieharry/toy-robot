@@ -89,19 +89,20 @@
     }
 
     function handleInput(bot, table) {
-      let placed = false; // to make sure bot is on the board
+      let placed = false;
       let input = "";
       while (input != "QUIT") {
         input = prompt("I'm a bot what should I do?");
 
         if (input.startsWith("PLACE")) {
-          let safeBot = new Robot(
-            input.charAt(6),
-            input.charAt(8),
-            input.substring(10)
-          );
+          //Create a test bot to see if position valid
+          let str = input.substring(6);
+          let splitInput = str.split(",");
+
+          let safeBot = new Robot(splitInput[0], splitInput[1], splitInput[2]);
           if (checkPosition(safeBot, table)) {
             placed = true;
+            //safebot passed the test so the new bot can safely be placed
             bot = safeBot;
             alert("Created bot at " + bot.reportPosition());
           }
